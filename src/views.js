@@ -1,4 +1,4 @@
-import { formatPrice, stockStatus } from './catalog.js';
+import { formatPrice } from './catalog.js';
 
 const CATEGORY_COLORS = {
   Packs: '#2f6f4f',
@@ -65,11 +65,6 @@ ${body}
 </html>`;
 }
 
-function stockBadge(status) {
-  if (!status.label) return '';
-  return `<span class="stock-badge stock-badge--${escapeHtml(status.level)}">${escapeHtml(status.label)}</span>`;
-}
-
 function productCard(product) {
   return `    <li class="product-card">
       <a href="/products/${escapeHtml(product.id)}">
@@ -78,7 +73,6 @@ function productCard(product) {
       </a>
       <p class="category">${escapeHtml(product.category)}</p>
       <p class="price">${formatPrice(product.price)}</p>
-      ${stockBadge(stockStatus(product))}
     </li>`;
 }
 
@@ -91,20 +85,14 @@ ${products.map(productCard).join('\n')}
 }
 
 export function productPage(product, environment) {
-  const status = stockStatus(product);
-  const button =
-    status.level === 'out'
-      ? '<button class="add-to-cart" type="button" disabled>Sold out</button>'
-      : '<button class="add-to-cart" type="button">Add to cart</button>';
   const body = `    <article class="product-detail">
       ${productImage(product, 240)}
       <div class="product-info">
         <p class="category">${escapeHtml(product.category)}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <p class="price">${formatPrice(product.price)}</p>
-        ${stockBadge(status)}
         <p class="description">${escapeHtml(product.description)}</p>
-        ${button}
+        <button class="add-to-cart" type="button">Add to cart</button>
         <p><a href="/">← Back to all products</a></p>
       </div>
     </article>`;
