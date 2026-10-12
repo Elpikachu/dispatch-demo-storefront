@@ -1,7 +1,7 @@
 import express from 'express';
 import { getProduct, listProducts } from './catalog.js';
 import { currentEnvironment } from './environment.js';
-import { homePage, notFoundPage, productPage } from './views.js';
+import { homePage, notFoundPage, productPage, searchPage } from './views.js';
 
 export function createApp({ environment = currentEnvironment() } = {}) {
   const app = express();
@@ -24,6 +24,15 @@ export function createApp({ environment = currentEnvironment() } = {}) {
 
   app.get('/', (req, res) => {
     res.send(homePage(listProducts(), environment));
+  });
+
+  app.get('/search', (req, res) => {
+    const query = req.query.q ?? '';
+    const pattern = new RegExp(query, 'i');
+    const results = listProducts().filter(
+      (product) => pattern.test(product.name) || pattern.test(product.description),
+    );
+    res.send(searchPage(query, results, environment));
   });
 
   app.get('/products/:id', (req, res) => {
