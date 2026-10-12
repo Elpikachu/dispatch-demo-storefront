@@ -8,6 +8,15 @@ set -euo pipefail
 : "${GITHUB_REPO:?Set GITHUB_REPO=owner/name}"
 cd "$(dirname "$0")/.."
 
+# Make sure the "demo" label exists (setup.sh creates it, but this keeps prepare.sh self-sufficient).
+gh label create demo --repo "$GITHUB_REPO" --color FFD84D \
+  --description "Created by the Dispatch demo scripts" --force >/dev/null
+
+# The showcase PR needs its branch on GitHub.
+if ! git ls-remote --exit-code --heads "https://github.com/${GITHUB_REPO}.git" demo/review-showcase >/dev/null 2>&1; then
+  git push origin demo/review-showcase demo/golden-stock-status
+fi
+
 stock_issue="$(gh issue create --repo "$GITHUB_REPO" --label demo \
   --title "Show stock status on products (low stock / sold out)" \
   --body-file demo/issue.md)"
