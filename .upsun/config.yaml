@@ -1,0 +1,24 @@
+# Upsun Cloud configuration.
+# Every Git branch / pull request gets its own environment built from this file.
+applications:
+  storefront:
+    source:
+      root: "/"
+    type: "nodejs:24"
+    build:
+      flavor: none
+    hooks:
+      build: |
+        set -e
+        npm ci --omit=dev --no-audit --no-fund
+    web:
+      commands:
+        start: "node src/server.js"
+
+routes:
+  "https://{default}/":
+    type: upstream
+    upstream: "storefront:http"
+  "https://www.{default}/":
+    type: redirect
+    to: "https://{default}/"

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "summit-35-backpack",
+    "name": "Summit 35 Backpack",
+    "category": "Packs",
+    "price": 129.0,
+    "stock": 42,
+    "description": "A 35-litre pack with a ventilated back panel, hip-belt pockets and a rain cover tucked in the base."
+  },
+  {
+    "id": "ridge-trail-shoes",
+    "name": "Ridge Trail Shoes",
+    "category": "Footwear",
+    "price": 149.0,
+    "stock": 3,
+    "description": "Light trail runners with a rock plate and a sticky outsole for wet granite."
+  },
+  {
+    "id": "alpine-down-jacket",
+    "name": "Alpine Down Jacket",
+    "category": "Clothing",
+    "price": 249.0,
+    "stock": 0,
+    "description": "800-fill down, recycled shell, packs into its own chest pocket."
+  },
+  {
+    "id": "trekking-poles-carbon",
+    "name": "Carbon Trekking Poles",
+    "category": "Accessories",
+    "price": 89.0,
+    "stock": 18,
+    "description": "A pair of three-section carbon poles with cork grips and flick locks."
+  },
+  {
+    "id": "basecamp-tent-2p",
+    "name": "Basecamp 2P Tent",
+    "category": "Camping",
+    "price": 329.0,
+    "stock": 5,
+    "description": "Freestanding two-person tent, two doors, two vestibules, 1.9 kg trail weight."
+  },
+  {
+    "id": "merino-base-layer",
+    "name": "Merino Base Layer",
+    "category": "Clothing",
+    "price": 69.0,
+    "stock": 60,
+    "description": "200 g/m² merino crew that stays warm when damp and does not hold odour."
+  },
+  {
+    "id": "headlamp-400",
+    "name": "Headlamp 400",
+    "category": "Accessories",
+    "price": 45.0,
+    "stock": 1,
+    "description": "400-lumen rechargeable headlamp with a red night mode and lock-out switch."
+  },
+  {
+    "id": "titanium-mug",
+    "name": "Titanium Mug 450",
+    "category": "Camping",
+    "price": 34.0,
+    "stock": 0,
+    "description": "Single-wall titanium mug with folding handles and volume markings."
+  }
+]
