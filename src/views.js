@@ -1,4 +1,4 @@
-import { formatPrice } from './catalog.js';
+import { formatPrice, stockStatus } from './catalog.js';
 
 const CATEGORY_COLORS = {
   Packs: '#2f6f4f',
@@ -33,6 +33,12 @@ function productImage(product, size) {
     <rect width="100" height="100" rx="12" fill="${color}"/>
     <text x="50" y="58" text-anchor="middle" font-size="30" font-family="system-ui, sans-serif" fill="#fff">${escapeHtml(initials(product.name))}</text>
   </svg>`;
+}
+
+function stockBadge(product) {
+  const status = stockStatus(product);
+  if (status.level === 'in') return '';
+  return `<span class="stock-badge stock-${status.level}">${escapeHtml(status.label)}</span>`;
 }
 
 function environmentBanner(environment) {
@@ -73,6 +79,7 @@ function productCard(product) {
       </a>
       <p class="category">${escapeHtml(product.category)}</p>
       <p class="price">${formatPrice(product.price)}</p>
+      ${stockBadge(product)}
     </li>`;
 }
 
@@ -84,6 +91,13 @@ ${products.map(productCard).join('\n')}
   return layout({ title: 'All products', body, environment });
 }
 
+function addToCartButton(product) {
+  if (stockStatus(product).level === 'out') {
+    return '<button class="add-to-cart" type="button" disabled>Sold out</button>';
+  }
+  return '<button class="add-to-cart" type="button">Add to cart</button>';
+}
+
 export function productPage(product, environment) {
   const body = `    <article class="product-detail">
       ${productImage(product, 240)}
@@ -91,8 +105,9 @@ export function productPage(product, environment) {
         <p class="category">${escapeHtml(product.category)}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <p class="price">${formatPrice(product.price)}</p>
+        ${stockBadge(product)}
         <p class="description">${escapeHtml(product.description)}</p>
-        <button class="add-to-cart" type="button">Add to cart</button>
+        ${addToCartButton(product)}
         <p><a href="/">← Back to all products</a></p>
       </div>
     </article>`;

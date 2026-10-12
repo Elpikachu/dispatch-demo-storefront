@@ -25,3 +25,18 @@ export function getProduct(id) {
 export function formatPrice(amount) {
   return priceFormatter.format(amount);
 }
+
+/** Products with this many items or fewer (but more than zero) are flagged as low stock. */
+export const LOW_STOCK_THRESHOLD = 5;
+
+/**
+ * Describes a product's availability.
+ * Returns { level: 'out' | 'low' | 'in', label } where label is empty when in stock.
+ */
+export function stockStatus(product) {
+  if (product.stock <= 0) return { level: 'out', label: 'Sold out' };
+  if (product.stock <= LOW_STOCK_THRESHOLD) {
+    return { level: 'low', label: `Only ${product.stock} left` };
+  }
+  return { level: 'in', label: '' };
+}

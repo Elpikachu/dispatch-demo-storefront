@@ -79,3 +79,14 @@ main { max-width: 1040px; margin: 0 auto; padding: 32px; }
 .add-to-cart:disabled { background: #a9b0ac; cursor: not-allowed; }
 
 .site-footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px; }
+
+.stock-badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stock-low { background: #ffe1a8; color: #7a4a00; }
+.stock-out { background: #e3e3e3; color: #555; }
