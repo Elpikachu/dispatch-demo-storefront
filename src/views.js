@@ -76,8 +76,26 @@ function productCard(product) {
     </li>`;
 }
 
+function searchForm(query = '') {
+  return `    <form class="search" action="/search" method="get">
+      <input type="search" name="q" value="${query}" placeholder="Search products">
+      <button type="submit">Search</button>
+    </form>`;
+}
+
+export function searchPage(query, results, environment) {
+  const body = `${searchForm(query)}
+    <h1>Results for "${query}"</h1>
+    <p>${results.length} product(s) found.</p>
+    <ul class="product-grid">
+${results.map(productCard).join('\n')}
+    </ul>`;
+  return layout({ title: 'Search', body, environment });
+}
+
 export function homePage(products, environment) {
-  const body = `    <h1>All products</h1>
+  const body = `${searchForm()}
+    <h1>All products</h1>
     <ul class="product-grid">
 ${products.map(productCard).join('\n')}
     </ul>`;
